@@ -42,7 +42,7 @@ def generate_coordinates(locations):
                 'lon': f'{lon}',
                 'lat': f'{lat}'
             })
-            remaining_distance += 1  # 1 km step size
+            remaining_distance += 1.628
 
     # Add the last location
     lat, lon = locations[-1]
@@ -72,16 +72,13 @@ def create_topic(topic_name):
 def main():
     locations = [
         (-33.865143, 151.209900),  # Sydney
-        (31.230390, 121.473702),  # Shanghai
         (1.3521, 103.8198),  # Singapore
-        (40.7360610, -73.935242),  # New York
-        (-34.603722, -58.381592),  # Buenos Aires
-        (25.276987, 55.296249),  # Dubai
-        (51.922500, 4.479200),  # Rotterdam
         (46.0569, 14.5058),  # Ljubljana
         (45.5167, 13.5667)  # Portorož
     ]
     generate_coordinates(locations)
+    with open('coordinates.json', 'r') as file:
+         coordinates = json.load(file)
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers,
                              value_serializer=lambda v: json.dumps(v).encode('utf-8'))
     create_topic(topic)
@@ -107,7 +104,7 @@ def main():
                 'deliveryId': 'id-0001'
             }
             producer.send(topic, value=record)
-            # time.sleep(0.08)
+            time.sleep(0.3)
             # logger.info(f"Message sent: {record}")
             index += 1
 

@@ -72,9 +72,9 @@ services:
       - OPENSEARCH_INITIAL_ADMIN_PASSWORD=P0rt0r0z2024!    # Sets the demo admin user password when using demo configuration, required for OpenSearch 2.12 and later
     healthcheck:
       test: ["CMD-SHELL", "curl -k -u admin:P0rt0r0z2024! --silent --fail https://localhost:9200/_cluster/health || exit 1"]
-      interval: 5s
+      interval: 6s
       timeout: 3s
-      retries: 10
+      retries: 30
     ulimits:
       memlock:
         soft: -1 # Set memlock to unlimited (no soft or hard limit)
@@ -88,7 +88,7 @@ services:
       - 9200:9200 # REST API
       - 9600:9600 # Performance Analyzer
     networks:
-      - streaming-net # All of the containers will join the same Docker bridge network
+      - streaming-net # All the containers will join the same Docker bridge network
   opensearch-node2:
     image: opensearchproject/opensearch:latest # This should be the same image used for opensearch-node1 to avoid issues
     container_name: opensearch-node2
