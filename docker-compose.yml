@@ -46,7 +46,6 @@ services:
         condition: service_healthy
     networks:
       - streaming-net
-
   producer:
     hostname: producer
     container_name: producer
@@ -114,6 +113,7 @@ services:
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:latest # Make sure the version of opensearch-dashboards matches the version of opensearch installed on other nodes
     container_name: opensearch-dashboards
+    hostname: dashboard
     ports:
       - 5601:5601 # Map host port 5601 to container port 5601
     expose:
@@ -129,9 +129,11 @@ services:
       context: ./openSearchIndex
     environment:
       HOST_ENV: "opensearch-node1:9200"
+      DASHBOARD_ENV: "dashboard:5601"
       PASSWORD: "P0rt0r0z2024!"
       USER: "admin"
       INDEX_NAME: tracking6
+      INDEX_PATTERN_NAME: tracking
     depends_on:
       opensearch-node1:
         condition: service_healthy
