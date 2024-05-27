@@ -36,8 +36,8 @@ Let's divide and conquer our situation here into several questions we need to an
 Agenda:
 
 - Setup
-- Module1: Flink Skeleton
-- Module2: Making it a good experience
+- Module 1: Flink Skeleton
+- Module 2: Making it a good experience
 - Module 3: Add Apache Kafka & record de-serialization
 - Module 4: Using the OpenSearch Sink
 - Module 5: Arrival forecasting
@@ -60,7 +60,7 @@ Make sure you have the following tools installed on your computer:
 
 You can also run
 ```shell
-git clone https://github.com/flo-mair/pet-the-squirrel
+git clone https://github.com/flo-mair/flink-getting-started
 ```
 
 and open it in your IDE.
@@ -442,6 +442,8 @@ The other services are needed later on.
 
 ![run broker](./img/module3/run-broker.png)
 
+You can also run `docker compose up --build` instead.
+
 Now you can start your Flink application again.
 
 You will see the messages in the output.
@@ -734,10 +736,18 @@ Click on `Create new vizualization` and choose `Maps`.
 
 ![opensearch map](./img/module4/map.png)
 
-TODO: Describe how to create map, use 10k points, change datetime to Christmas 2023
+Click `Add Layer` and choose `Documents`.
 
-Great now you can see where your package is currently at!
-In the next module you will evaluate if the package arrives on time.
+For index pattern select `tracking` and set Geospatial field to `coordinates`. Increase the number of documents to 10,000.
+
+Click on `Update`.
+
+Set the time to include the dates from `December 2023` so you can see the records`
+
+Don`t see any records?
+**Make sure your Flink application is running**
+
+### Fantastic! You now can track your package in real-time on this map.
 
 ## Module 5: Arrival forecasting
 
