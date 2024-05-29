@@ -108,6 +108,14 @@ In the `Advanced Settings` section, set the `ArtificatId` to `flinkJob` and then
 
 ![create](./img/module1/create.png)
 
+You can also run the following command:
+
+```shell
+mvn archetype:generate                               \
+      -DarchetypeGroupId=org.apache.flink              \
+      -DarchetypeArtifactId=flink-quickstart-java      \
+      -DarchetypeVersion=1.18.1
+```
 After a few seconds the maven project is created. You can close the warning at the bottom.
 
 In the filetree on the left open the `DataStreamJob` class in the editor by double-clicking it.
@@ -742,7 +750,7 @@ For index pattern select `tracking` and set Geospatial field to `coordinates`. I
 
 Click on `Update`.
 
-Set the time to include the dates from `December 2023` so you can see the records`
+Set the time to include the dates from `December 2023` so you can see the records`.
 
 Don`t see any records?
 **Make sure your Flink application is running**
